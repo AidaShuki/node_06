@@ -186,7 +186,19 @@ $(() => {
         image.onload = (e) => {
             const canvas = document.createElement('canvas')
             canvas.width = image.naturalWidth
-            
+            canvas.height = image.naturalHeight
+            const ctx = canvas.getContext('2d')
+            ctx.drawImage(image, 0 ,0)
+            //データエンコード
+            const base64 = canvas.toDataURL(mine_type)
+            const data = {user: user, image: base64}
+            //サーバーに送信
+            socket.emit('upload_stamp', data)
         }
+    })
+
+    //スタンプ受信
+    socket.on('load_stamp', (data) => {
+        createChatMessage(data, {width:STAMP_WIDTH})
     })
 })
