@@ -171,4 +171,22 @@ $(() => {
         addMessage(message)
         updateUserList()
     })
+
+    //スタンプ表示
+    $('.stamp').on('click',() => {
+        stampList.toggle()
+    })
+
+    //スタンプ送信
+    $('.uploadStamp').on('click',(event) => {
+        const image = new Image()
+        image.src = $(event.target).attr('src')
+        const mine_type = 'image/png'
+
+        image.onload = (e) => {
+            const canvas = document.createElement('canvas')
+            canvas.width = image.naturalWidth
+            
+        }
+    })
 })
